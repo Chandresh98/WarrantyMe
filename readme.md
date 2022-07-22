@@ -1,3 +1,5 @@
+run in postman
+
 1 api post
 
 /*fetching N news articles*/
@@ -24,6 +26,10 @@ atleast 1 is required
 3 get api
 /* searching by keywords*/
 keyword with same name in quary params like news, tecnology etc
+
+
+
+i know to use redis but its is closed so i have not use cache in this
 
 
 

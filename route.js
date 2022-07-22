@@ -3,6 +3,27 @@ const router = express.Router()
 const cors = require('cors')
 const axios = require('axios')
 const { json } = require('body-parser')
+const redis = require('redis')
+
+
+// const redisClient = redis.createClient(
+//     16368,
+//     "redis-16368.c15.us-east-1-2.ec2.cloud.redislabs.com",
+//     { no_ready_check: true }
+// );
+// redisClient.auth("Y52LH5DG1XbiVCkNC2G65MvOFswvQCRQ", function (err) {
+//     if (err) throw err.message;
+// });
+
+// redisClient.on("connect", async function () {
+//     console.log("Connected to Redis..");
+// });
+
+// const SET_ASYNC = promisify(redisClient.SET).bind(redisClient);
+// const GET_ASYNC = promisify(redisClient.GET).bind(redisClient);
+
+
+
 
 // n number of news articles
 router.post('/newsArticles/:number',async (req, res) => {
@@ -70,7 +91,10 @@ router.get('/searchByKeyword', async (req,res)=>{
         if(!keyword){
             return res.status(400).send({status:false,message:"please enter keyword"})
         }
+        // let getsync = await GET_ASYNC(keyword)
+
         const abc= await axios.get(`https://gnews.io/api/v4/search?q=${keyword}&token=fb69ac0cee34110cbbaf641878743d30`)
+        // let setKeyword = await SET_ASYNC(keyword,JSON.stringify(abc))
          let data = abc.data.articles
          return res.status(200).send({status:true,message:"successful",totalArticles:data.length ,data:data})
          
